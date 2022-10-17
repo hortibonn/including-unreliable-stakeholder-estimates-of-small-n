@@ -5,8 +5,6 @@ Lars Caspersen
 
 ## Context
 
-AAAAAAAAA
-
 In a research project on nutrient flows in the district of Kleve,
 Germany, several stakeholder coming from different industries (farmers,
 waste treatment, environmentalists, food processing, scientists) were
@@ -497,7 +495,7 @@ ggplot(dist_df, aes(x = value)) +
   theme_bw()
 ```
 
-    ## Warning: Removed 42 rows containing non-finite values (stat_bin).
+    ## Warning: Removed 46 rows containing non-finite values (stat_bin).
 
     ## Warning: Removed 8 rows containing missing values (geom_bar).
 
