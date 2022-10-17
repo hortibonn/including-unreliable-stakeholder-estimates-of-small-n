@@ -1,20 +1,19 @@
 ## Context
 
 In a research project on nutrient flows in the district of Kleve,
-Germany several stakeholder coming from different industries (farmers,
+Germany, several stakeholder coming from different industries (farmers,
 waste treatment, environmentalists, food processing, scientists) were
 interviewed. This is a follow-up project on a study were nutrient flows
 in the agro-food-waste system of Kleve were mapped (van der Wiel et al.
 2021). A simplified version of the outcomes can be seen for the example
 of nitrogen flows in the figure below. The study was carried out on a
-district level, boxes in the Figure represent the studied subsystems
-crop farming, animal farming, food processing, consumers and waste
-treatment. The system boundaries are represented in the outer box. Flows
-between the subsystem were collected from reports, expert estimates and
-modeled. The study investigated flows of nitrogen (N), phosphorous (P),
-potassium (K) and to a lesser extent carbon (C). In the figure below the
-flows were aggregated of numerous individual subsystem interactions, for
-more details please refer to van der Wiel et al. (2021).
+district level, boxes represent the studied subsystems. The system
+boundaries are represented in the outer box. Flows between the subsystem
+were collected from reports, expert estimates and model outputs. The
+study investigated flows of nitrogen (N), phosphorous (P), potassium (K)
+and to a lesser extent carbon (C). In the figure below the flows were
+aggregated of numerous individual subsystem interactions, for more
+details please refer to van der Wiel et al. (2021).
 
 <img src="simplified model.jpg" alt="Nitrogen flows in the agro-food-feed-waste system in Kleve, Germany for the reference year 2020. The nitrogen flows (t) between the subsystems were cumulated. This figure is a modified version of Figure 1 in @van2021restoring" width="70%" />
 <p class="caption">
@@ -24,10 +23,10 @@ were cumulated. This figure is a modified version of Figure 1 in van der
 Wiel et al. (2021)
 </p>
 
-In the current project the nutrient flow calculation were brought to R
+In the current project, the nutrient flow calculation were brought to R
 and are probabilistic instead of deterministic. Furthermore, a scenario
-deviating fromt the baseline calculations was included. Fore more
-details on the model please have a look at the [GitHub
+deviating from the baseline calculations was included. Fore more details
+on the model please have a look at the [GitHub
 repo](https://github.com/larscaspersen/DA-nutrient-flow-Kleve)
 Stakeholders were asked to give estimates on a theoretical scenario, in
 which animals in Kleve are exclusively fed using locally sourced (within
@@ -42,7 +41,7 @@ subsystems (biogas, application on fields, export to other districts).
 
 Because of the Corona pandemic and more importantly the unwillingness of
 major stakeholder (especially farmers union) having workshops in the
-usual decision analysis way were not possible. Instead we opted to have
+usual decision analysis-way were not possible. Instead, we opted to have
 interviews with stakeholders willing to cooperate. These interviews had
 several caveats: the stakeholders were not properly calibrated, the
 stakeholders felt extremely uncomfortable to give estimates on these
@@ -53,9 +52,9 @@ workshop were stakeholders could give feedback on the collected ranges.
 
 ## Getting stakeholder estimates via questionnaires
 
-We received only few answers and in most cases they were not in ranges.
-The following diagram shows the stakeholder estimates for the four
-questions:
+We received only few answers and in most cases they were not given in
+ranges. The following diagram shows the stakeholder estimates for the
+four questions:
 
 1.  In reference year 2020 around 67% of produced crops N which were not
     exported were used to feed animals. The remaining were used for
@@ -140,15 +139,15 @@ ggplot(answers, aes(x = var, y = middle)) +
 
 ![](include_stakeholders_files/figure-markdown_github/unnamed-chunk-2-1.png)
 
-You can see that in some cases, like the livestock_composition the
-answers are tightly clustered around the provided reference year values,
-a classic example of anchoring. For some questions the stakeholders had
+You can see that in some cases, like livestock_composition, the answers
+are tightly clustered around the provided reference year values, a
+classical example of anchoring. For some questions the stakeholders had
 very different ideas, like in the facet for manure allocation. It seems
 that the answers are evenly spread across a certain interval. Some
 trends can be seen, for example most of the stakeholders expect a lower
 degree of manure export, they just couldn’t “agree” on the exact level.
-But in some cases the stakeholders had completely different ideas about
-the impact of the scenario. For example the facet for crop allocation
+But in some cases the stakeholders have completely different ideas about
+the impact of the scenario. For example, the facet for crop allocation
 (top left) shows drastically different ideas. There is one group of
 stakeholders that expect and increase in crops allocated to feed and
 there is a second, somewhat more dispersed group of stakeholders who
@@ -159,7 +158,7 @@ For example the stakeholder who expects only 10 - 20% of crops allocated
 to animals only expects a 30% reduction in livestock population. That
 seems to not add up… In general I was surprised to see a lack of “story”
 in most of the stakeholders answers, except for the “take feed and give
-it to humans” trend. Probably the scenario was too abstract and the task
+it to humans”-trend. Probably the scenario was too abstract and the task
 was too difficult to give answers which are consistent with each other.
 
 ## The challenge
@@ -281,7 +280,7 @@ ggplot(answers, aes(x = var)) +
 
 ![](include_stakeholders_files/figure-markdown_github/unnamed-chunk-4-1.png)
 
-Again, looks more most questions fine. Some of the more extreme answers
+Again, looks for most questions fine. Some of the more extreme answers
 are not represented anymore by the input range. Furthermore, some new
 areas which were not represented by stakeholder answers are now covered
 by the input range, as you can see for the example crop allocated to
@@ -294,7 +293,7 @@ crop allocated to feed into the group of stakeholders expecting increase
 in crops allocated to crops and another one for decrease. Similarly, we
 could split the answers for crops allocated to humans, we could have a
 group of moderate change and one group expecting strong increase. The
-second split is a littlebit less well balanced, though. We could leave
+second split is a little bit less well balanced, though. We could leave
 things as they are for the other groups because there it is more
 difficult to see distinct groups of answers. We could insert the
 stakeholder answer ranges per group in the input table and then link
@@ -487,7 +486,7 @@ ggplot(dist_df, aes(x = value)) +
   theme_bw()
 ```
 
-    ## Warning: Removed 44 rows containing non-finite values (stat_bin).
+    ## Warning: Removed 43 rows containing non-finite values (stat_bin).
 
     ## Warning: Removed 8 rows containing missing values (geom_bar).
 
