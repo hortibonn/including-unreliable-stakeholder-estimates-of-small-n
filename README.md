@@ -1,4 +1,11 @@
+How to implement uncalibrated stakeholder input with small sample size
+================
+Lars Caspersen
+2022-10-14
+
 ## Context
+
+AAAAAAAAA
 
 In a research project on nutrient flows in the district of Kleve,
 Germany, several stakeholder coming from different industries (farmers,
@@ -15,13 +22,7 @@ and to a lesser extent carbon (C). In the figure below the flows were
 aggregated of numerous individual subsystem interactions, for more
 details please refer to van der Wiel et al. (2021).
 
-<img src="simplified model.jpg" alt="Nitrogen flows in the agro-food-feed-waste system in Kleve, Germany for the reference year 2020. The nitrogen flows (t) between the subsystems were cumulated. This figure is a modified version of Figure 1 in @van2021restoring" width="70%" />
-<p class="caption">
-Nitrogen flows in the agro-food-feed-waste system in Kleve, Germany for
-the reference year 2020. The nitrogen flows (t) between the subsystems
-were cumulated. This figure is a modified version of Figure 1 in van der
-Wiel et al. (2021)
-</p>
+<img src="simplified model.jpg" title="Nitrogen flows in the agro-food-feed-waste system in Kleve, Germany for the reference year 2020. The nitrogen flows (t) between the subsystems were cumulated. This figure is a modified version of Figure 1 in @van2021restoring" alt="Nitrogen flows in the agro-food-feed-waste system in Kleve, Germany for the reference year 2020. The nitrogen flows (t) between the subsystems were cumulated. This figure is a modified version of Figure 1 in @van2021restoring" width="70%" />
 
 In the current project, the nutrient flow calculation were brought to R
 and are probabilistic instead of deterministic. Furthermore, a scenario
@@ -56,21 +57,21 @@ We received only few answers and in most cases they were not given in
 ranges. The following diagram shows the stakeholder estimates for the
 four questions:
 
-1.  In reference year 2020 around 67% of produced crops N which were not
+1)  In reference year 2020 around 67% of produced crops N which were not
     exported were used to feed animals. The remaining were used for
     local human consumption (9%) and biogas (24%). How do you think will
     these allocation change in a local feed scenario?
-2.  In reference year 2020 the livestock composition (measured in
+2)  In reference year 2020 the livestock composition (measured in
     livestock units) in Kleve was 64% cattle, 28% pig, 4% poultry and 4%
     other animals (horses, sheep, goats). How do you think the
     composition will change under a local feed scenario?
-3.  In the reference year 2020 import of feed made up around 45% of the
+3)  In the reference year 2020 import of feed made up around 45% of the
     nitrogen allocated to animals in form of feed. In a local feed
     scenario this amount would be assumed to be missing, but changes in
     the allocation of crops could substitute parts of it. How strong do
     you expect the overall livestock population in Kleve to shrink in a
     local feed scenario?
-4.  In a local feed scenario manure is more likely to become scarce. In
+4)  In a local feed scenario manure is more likely to become scarce. In
     the reference year 2020 around 53% of manure N was exported (most
     likely Kleve is a transit district for dutch manure, because imports
     are high as well), 36 % of manure N were applied as fertilizer on
@@ -103,13 +104,20 @@ answers <- read.csv('stakeholder_answers.csv')
 head(answers)
 ```
 
-    ##   stakeholder_code stakeholder_group              var middle upper lower             category subgroup
-    ## 1                a            nature      crop_biogas     12    NA    NA                 crop        a
-    ## 2                a            nature        crop_feed     79    NA    NA                 crop        a
-    ## 3                a            nature        crop_food      9    NA    NA                 crop        a
-    ## 4                a            nature animal_reduction     20    NA    NA  livestock_reduction        a
-    ## 5                a            nature           cattle     71    NA    NA livestock_compostion        a
-    ## 6                a            nature              pig     18    NA    NA livestock_compostion        a
+    ##   stakeholder_code stakeholder_group              var middle upper lower
+    ## 1                a            nature      crop_biogas     12    NA    NA
+    ## 2                a            nature        crop_feed     79    NA    NA
+    ## 3                a            nature        crop_food      9    NA    NA
+    ## 4                a            nature animal_reduction     20    NA    NA
+    ## 5                a            nature           cattle     71    NA    NA
+    ## 6                a            nature              pig     18    NA    NA
+    ##               category subgroup
+    ## 1                 crop        a
+    ## 2                 crop        a
+    ## 3                 crop        a
+    ## 4  livestock_reduction        a
+    ## 5 livestock_compostion        a
+    ## 6 livestock_compostion        a
 
 ``` r
 #create data for of reference year
@@ -137,7 +145,7 @@ ggplot(answers, aes(x = var, y = middle)) +
   theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1))
 ```
 
-![](include_stakeholders_files/figure-markdown_github/unnamed-chunk-2-1.png)
+![](README_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
 
 You can see that in some cases, like livestock_composition, the answers
 are tightly clustered around the provided reference year values, a
@@ -184,7 +192,8 @@ answers_summarised <- answers %>%
   mutate(middle = (upper + lower) / 2)
 ```
 
-    ## `summarise()` has grouped output by 'var'. You can override using the `.groups` argument.
+    ## `summarise()` has grouped output by 'var'. You can override using the `.groups`
+    ## argument.
 
 ``` r
 #this needed to draw shaded areas in the plot
@@ -221,7 +230,7 @@ ggplot(answers, aes(x = var)) +
   theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1))
 ```
 
-![](include_stakeholders_files/figure-markdown_github/unnamed-chunk-3-1.png)
+![](README_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
 
 Overall this looks okayish, but have a look at the middle of the input
 range for the crops allocated to feed. The clustered answers indicating
@@ -241,7 +250,8 @@ answers_summarised <- answers %>%
          lower = middle - sd_answer)
 ```
 
-    ## `summarise()` has grouped output by 'var'. You can override using the `.groups` argument.
+    ## `summarise()` has grouped output by 'var'. You can override using the `.groups`
+    ## argument.
 
 ``` r
 #this needed to draw shaded areas in the plot
@@ -278,7 +288,7 @@ ggplot(answers, aes(x = var)) +
   theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1))
 ```
 
-![](include_stakeholders_files/figure-markdown_github/unnamed-chunk-4-1.png)
+![](README_files/figure-gfm/unnamed-chunk-4-1.png)<!-- -->
 
 Again, looks for most questions fine. Some of the more extreme answers
 are not represented anymore by the input range. Furthermore, some new
@@ -316,7 +326,8 @@ answers_summarised <- answers %>%
          group_weight = n / 9)
 ```
 
-    ## `summarise()` has grouped output by 'var', 'category'. You can override using the `.groups` argument.
+    ## `summarise()` has grouped output by 'var', 'category'. You can override using
+    ## the `.groups` argument.
 
 ``` r
 #this needed to draw shaded areas in the plot
@@ -356,7 +367,7 @@ ggplot(answers, aes(x = var)) +
   theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust = 1))
 ```
 
-![](include_stakeholders_files/figure-markdown_github/unnamed-chunk-5-1.png)
+![](README_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
 
 Okay this plot is getting a bit loaded but bear with me. There are again
 some drawbacks to this approach. The area in between the groups is not
@@ -406,8 +417,8 @@ res <- optim(par = c(12, 1), fn = model, parms = c(m, q05, q95), method = "Nelde
       lower = c(0.01, -1000), upper = c(1000,1000))
 ```
 
-    ## Warning in optim(par = c(12, 1), fn = model, parms = c(m, q05, q95), method = "Nelder-Mead", : bounds can only be used with method L-
-    ## BFGS-B (or Brent)
+    ## Warning in optim(par = c(12, 1), fn = model, parms = c(m, q05, q95), method =
+    ## "Nelder-Mead", : bounds can only be used with method L-BFGS-B (or Brent)
 
 ``` r
 #we calculate the parameter xi for the results
@@ -419,7 +430,7 @@ x <- seq(0, 120, by=0.2)
 plot(sn::dsn(x, omega = res$par[1], alpha = res$par[2], xi = xi), x = x)
 ```
 
-![](include_stakeholders_files/figure-markdown_github/unnamed-chunk-6-1.png)
+![](README_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
 
 This could be promising. I decided to compare the different
 distributions resulting from the different processing approaches.
@@ -486,11 +497,11 @@ ggplot(dist_df, aes(x = value)) +
   theme_bw()
 ```
 
-    ## Warning: Removed 43 rows containing non-finite values (stat_bin).
+    ## Warning: Removed 42 rows containing non-finite values (stat_bin).
 
     ## Warning: Removed 8 rows containing missing values (geom_bar).
 
-![](include_stakeholders_files/figure-markdown_github/unnamed-chunk-7-1.png)
+![](README_files/figure-gfm/unnamed-chunk-7-1.png)<!-- -->
 
 The figure above shows the distributions that result from the different
 approaches to integrate the raw stakeholder estimations. The answers of
@@ -551,8 +562,16 @@ any post-hoc analysis).
 
 ## References
 
+<div id="refs" class="references csl-bib-body hanging-indent">
+
+<div id="ref-van2021restoring" class="csl-entry">
+
 van der Wiel, Bernou Zoë, Jan Weijma, Corina Everarda van Middelaar,
 Matthias Kleinke, Cees Jan Nico Buisman, and Florian Wichern. 2021.
 “Restoring Nutrient Circularity in a Nutrient-Saturated Area in Germany
 Requires Systemic Change.” *Nutrient Cycling in Agroecosystems* 121 (2):
 209–26. <https://doi.org/10.1007/s10705-021-10172-3>.
+
+</div>
+
+</div>

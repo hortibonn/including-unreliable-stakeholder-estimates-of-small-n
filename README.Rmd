@@ -2,7 +2,7 @@
 title: "How to implement uncalibrated stakeholder input with small sample size"
 author: "Lars Caspersen"
 date: "2022-10-14"
-output: html_document
+output: github_document
 bibliography: references.bib
 ---
 
